@@ -1,0 +1,31 @@
+#excel-upload-form{
+    text-align: center;
+}
+#excel-upload-form button{
+    background-color: red;
+    color: #0a0c0d
+}
+
+/*list boxes css*/
+#lstBox1, #lstBox2{
+    height:200px;
+    width:250px;
+}
+
+.approveTermsContainer{
+    display:flex;
+    justify-content:center;
+}
+
+.transferBtns {
+    margin-right: 30px;
+    margin-left: 30px;
+}
+
+.transferBtns{
+    float:left;
+    align-self:center;
+}
+
+
+

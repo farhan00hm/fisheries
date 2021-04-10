@@ -1,0 +1,242 @@
+/*Homepage CSS START*/
+
+#data-accessible-right-section{
+    /*margin-top: 10px;*/
+    /*margin-left: 30px;*/
+    /*margin-right: 30px;*/
+    background-color: white;
+    /*overflow: hidden;*/
+    /*height: 300px;*/
+
+}
+
+#data-accessible-right-section h1{
+    text-align: center;
+    font-family: fantasy;
+    margin-top: 30px;
+}
+
+#category-div{
+    /*width: 500px;*/
+    margin: 50px;
+    margin-top: 0px;
+    min-height: 200px;
+    align-content: center;
+    background-color: white;
+    border-radius: 10px;
+    border-style: solid;
+    border: firebrick;
+    margin-bottom: 0px;
+}
+
+.homepage-content{
+    background-color: #ffeca0;
+    margin: 15px;
+    margin-top: 30px;
+    padding: 10px;
+}
+.homepage-content img{
+    max-height: 16px;
+    max-width: 16px;
+}
+
+.data-without-dataful-heading{
+    text-align: center;
+    font-family: Abel;
+    margin: 30px;
+}
+
+.data-with-without-dataful-section{
+    background-color: #f6f6f6;
+    margin: 10px;
+    margin-top: 30px;
+    padding: 20px;
+    text-align: center;
+}
+
+.data-with-without-dataful-section img{
+    /*max-width: 100px;*/
+    /*max-height: 50px;*/
+    width: 84px;
+    height: 96px;
+    min-width: 84px;
+    min-height: 96px;
+}
+.data-with-without-dataful-section p{
+    font-family: Abel;
+}
+#istanbul-image-content{
+    margin: 10px;
+    margin-top: 30px;
+    padding: 20px;
+    /*display: block;*/
+    /*text-align: center;*/
+    /*align-content: center;*/
+}
+#istanbul-image-content img{
+    display: block;
+    text-align: center;
+}
+
+/*Homepage CSS END*/
+
+
+
+
+
+
+
+.head-nav{
+    height: 100px;
+    width: 100%;
+    /*border: 1px solid;*/
+    padding: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+/*dataful logo*/
+.head-nav img {
+    vertical-align: middle;
+    max-width: 250px;
+    max-height: 66px;
+
+    /*margin: auto;*/
+}
+
+/*dataful slogan*/
+#slogan{
+    font-size: small;
+    margin-left: 10px;
+}
+#navigation-menu{
+    vertical-align: middle;
+    float: right;
+}
+
+.bg-light{
+    background-color: white !important;
+}
+/*make navigation item bold*/
+#navbarSupportedContent a{
+    font-weight: bold;
+}
+
+.article-body{
+    width: 100%;
+    padding: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+#publish-date{
+    margin-top: 20px;
+    font-size: 11px;
+    color: gray;
+}
+
+#brief-note{
+    /*background-color: red;*/
+    background-color: #e5eaed;
+    padding: 25px;
+}
+
+#quick-Fact{
+    position: absolute;
+    font-size: 50px;
+    color: #0693e3;
+    top: 20%;
+    left: 50%;
+    right: 0;
+    /*margin-top: -9px;*/
+}
+#quick-text{
+    /*background-color: #e5eaed;*/
+    background-color: #0e90d2;
+    /*margin: 10px;*/
+    padding: 20px;
+    /*float: left;*/
+}
+
+#know-more-heading{
+    background: black;
+    margin-top: 20px;
+    color: white;
+    padding: 15px;
+    text-align: center;
+}
+#know-more-content{
+    background: #ffeca0;
+    padding: 10px;
+    font-size: 14px;
+}
+
+#know-more-content img {
+    max-height: 16px;
+    max-width: 16px;
+}
+
+#visualization-id{
+    background: #f1c64f;
+}
+#graph-section{
+    margin-top: 20px;
+    /*max-height: 316px;*/
+    /*overflow-y: hidden;*/
+    /*padding: 5px;*/
+}
+#graph-section table{
+    /*max-width: 617px;*/
+    max-height: 316px;
+}
+#visualization-id{
+    padding: 5px;
+    font-weight: bold;
+    margin-bottom: 0px;
+}
+
+/*article table css*/
+#article-table-div{
+    max-height: 316px;
+    overflow-y: scroll;
+    margin-bottom: 5px;
+    /*max-width: 617px;*/
+}
+#article-table-div table tbody{
+    /*max-height: 316px;*/
+    /*max-width: 295px !important;*/
+    overflow-y: scroll;
+}
+
+
+
+.footer{
+    height: 200px;
+    background: #313131;
+    color: white;
+}
+
+#address{
+    margin-left: 30px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+
+/*Related link on article page*/
+.related-title-link{
+    background: #8ed1fc;
+    color: black;
+    margin-top: 5px;
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    line-height: 1;
+    font-size: 16px;
+    text-align: left;
+    /*margin: 15px;*/
+}
+.related-title-login-link{
+    margin: 1rem;
+    margin-left: 0;
+    color: black;
+    font-size: 20px;
+    font-family: "Agency FB";
+}
