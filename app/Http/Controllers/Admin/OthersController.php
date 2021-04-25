@@ -3,34 +3,34 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Capture;
+use App\Models\Others;
 use App\Service\ExcelDataStoreService;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
-class CaptureController extends Controller
+class OthersController extends Controller
 {
     public function index(){
-        $captures = Capture::paginate(20);
-        return view('admin.capture')->with("captures",$captures);
+        $others = Others::paginate(20);
+        return view('admin.others')->with("others",$others);
     }
 
     public function store(Request $request){
 
         $this->filevaidate();
 
-        $files =   $request->file('capture_files');
+        $files =   $request->file('other_files');
         $existing_files = array();
         $uploaded_files = array();
         $excelDataStore ="";
         foreach ($files as $file){
-//            dd($file);
             $fileName = pathinfo($file->getClientOriginalName(),PATHINFO_FILENAME);
             try{
-                $capture = new Capture();
-                $capture->file_name = $fileName;
-                $capture->save();
+                $other = new Others();
+                $other->file_name = $fileName;
+                $other->save();
 
                 global $uploaded_files,$excelDataStore;
                 $excelDataStore = new ExcelDataStoreService($request);
@@ -45,18 +45,16 @@ class CaptureController extends Controller
 
         }
 
-//        $uploaded_files = $excelDataStore->getUploadedFiles();
 //        TODO need to pass success and failure file
-        return redirect('/admin/capture');
-//        return redirect(route('admin.dashboard'));
+        return redirect('/admin/others');
 
     }
 
     public function filevaidate()
     {
         return request()->validate([
-            'capture_files' => 'required',
-            'capture_files.*' => 'mimes:xlsx,xls'
+            'other_files' => 'required',
+            'other_files.*' => 'mimes:xlsx,xls'
         ]);
     }
 }

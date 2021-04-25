@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CaptureController;
+use App\Http\Controllers\Admin\OthersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,7 +32,16 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'], function (){
 
     //Capture
     Route::get('/capture',[CaptureController::class,'index'])->name('capture-index');
+    Route::post('/capture',[CaptureController::class,'store'])->name('capture-store');
+
+    Route::get('/others',[OthersController::class,'index'])->name('others-index');
+    Route::post('/others',[OthersController::class,'store'])->name('others-store');
 });
 
 
 Route::get('/logout',[AdminController::class,'logout']);
+
+//User Test
+Route::get("/test", function (){
+    return view("user.home");
+});

@@ -63,6 +63,7 @@
                         <li><a href="{{ url('#') }}"><i class="menu-icon icon-inbox"></i>Marine</a></li>
                         <li><a href="{{ url('#') }}"><i class="menu-icon icon-inbox"></i>Hilsa</a></li>
                         <li><a href="{{ url('#') }}"><i class="menu-icon icon-inbox"></i>Shrimp/Prawn</a></li>
+                        <li><a href="{{ route('others-index') }}">Others</a></li>
 
 
 
@@ -85,7 +86,7 @@
             </div>
 
             @yield('capture')
-            @yield('create-article-from')
+            @yield('others')
             @yield('all-articles')
             @yield('all-tables')
             @yield('all-graphs')

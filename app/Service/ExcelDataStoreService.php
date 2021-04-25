@@ -5,23 +5,29 @@ namespace App\Service;
 
 
 use App\Imports\ExcelImporter;
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Schema;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ExcelDataStoreService
 {
     public  $request;
+    private $uploaded_files = array();
 
     public function __construct($request) {
         $this->request = $request;
     }
 
     public function storeCellDataIntoDatabase($file,$fileName){
+
         $import = new ExcelImporter();
         Excel::import($import,$file);
         $rows = $import->rows->toArray();
         $attributeName = [];
         $tableHeads = [];
+        Log::info("Rows is: ",$rows);
         foreach ($rows as $key => $row) {
 
             if ($key == 0) {
@@ -48,9 +54,36 @@ class ExcelDataStoreService
                     $cellData[$attributeName[$i]] = $row[$i];
                 }
                 DB::table($fileName)->insert($cellData);
+                array_push($this->uploaded_files,$fileName);
 
             }
         }
     }
 
+    public function createTable($tableName, $tableHeads = [])
+    {
+
+        if (!Schema::hasTable($tableName)) {
+            Schema::create($tableName, function (Blueprint $table) use ($tableHeads, $tableName) {
+                $table->increments('id');
+                if (count($tableHeads) > 0) {
+                    foreach ($tableHeads as $tableHead) {
+                        $table->{$tableHead['type']}($tableHead['name']);
+                    }
+                }
+//                $table->timestamps();
+            });
+//            return response()->json(['message' => 'Given table has been successfully creted']);
+//            Log::info("Table Name is: ".$tableName);
+            return true;
+        }
+//        return response()->json(['message' => 'Given table is already Exists.', 400]);
+        return false;
+    }
+
+    public function getUploadedFiles(){
+
+//        Log::info("Upload Files: ".$this->uploaded_files);
+        return $this->uploaded_files;
+    }
 }
