@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CaptureController;
 use App\Http\Controllers\Admin\OthersController;
+use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,6 +43,4 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'], function (){
 Route::get('/logout',[AdminController::class,'logout']);
 
 //User Test
-Route::get("/test", function (){
-    return view("user.home");
-});
+Route::get("/home",[UserController::class,'home']);
