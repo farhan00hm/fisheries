@@ -68,7 +68,11 @@ class ExcelDataStoreService
                 $table->increments('id');
                 if (count($tableHeads) > 0) {
                     foreach ($tableHeads as $tableHead) {
-                        $table->{$tableHead['type']}($tableHead['name']);
+                        if($tableHead['type'] == "double"){
+                            $table->{$tableHead['type']}($tableHead['name'])->nullable();
+                        }else{
+                            $table->{$tableHead['type']}($tableHead['name']);
+                        }
                     }
                 }
 //                $table->timestamps();

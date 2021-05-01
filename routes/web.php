@@ -42,5 +42,10 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'], function (){
 
 Route::get('/logout',[AdminController::class,'logout']);
 
-//User Test
+//User
 Route::get("/home",[UserController::class,'home']);
+
+//Capture
+Route::get('/capture/location/{location}',[UserController::class,'captureByLocation'])->name('capture-by-location');
+Route::get('/capture/species/{species}',[UserController::class,'captureBySpecies'])->name('capture-by-species');
+Route::get('/at-a-glance/{category}',[UserController::class,'atAGlanceByCategoryAndYear'])->name('at-a-glance-by-category-and-year');

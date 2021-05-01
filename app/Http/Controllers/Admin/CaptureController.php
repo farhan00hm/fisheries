@@ -30,11 +30,11 @@ class CaptureController extends Controller
             try{
                 $capture = new Capture();
                 $capture->file_name = $fileName;
-                $capture->save();
 
                 global $uploaded_files,$excelDataStore;
                 $excelDataStore = new ExcelDataStoreService($request);
                 $excelDataStore->storeCellDataIntoDatabase($file,$fileName);
+                $capture->save();
             }catch (QueryException $e){
                 $errorCode = $e->errorInfo[1];
                 if($errorCode == 1062){

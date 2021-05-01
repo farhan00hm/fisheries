@@ -5,6 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="_base_url" content="{{ url('/') }}">
     <title>Fisheries Tracker</title>
 
     {{--    Bootstrap   --}}
@@ -19,6 +20,9 @@
 
     {{--    Custom CSS--}}
     <link rel="stylesheet" href="{{ asset("public/assets/user-pages-assets/css/style.css") }}">
+
+    {{--    ajax CDN    --}}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     {{--chart js--}}
 {{--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>--}}
@@ -103,44 +107,15 @@
     @yield('home')
 </div>
 </body>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+{{--<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>--}}
+{{--<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>--}}
+{{--<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>--}}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.min.js"></script>
+{{--<script src="https://rawgit.com/emn178/chartjs-plugin-labels/master/src/chartjs-plugin-labels.js"></script>--}}
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>
 
 @yield('javascript')
-<script>
-    var options = {
-        type: 'line',
-        data: {
-            labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-            datasets: [
-                {
-                    label: '# of Votes',
-                    data: [12, 19, 3, 5, 2, 3],
-                    borderWidth: 2,
-                    borderColor: '#b71705',
-                    fill: false
-                },
-                {
-                    label: '# of Points',
-                    data: [7, 11, 5, 8, 3, 7],
-                    borderWidth: 1
-                }
-            ]
-        },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        reverse: false
-                    }
-                }]
-            }
-        }
-    }
-
-    var ctx = document.getElementById('line-chart').getContext('2d');
-    new Chart(ctx, options);
-</script>
-
+@include('user/javascript')
 </html>
