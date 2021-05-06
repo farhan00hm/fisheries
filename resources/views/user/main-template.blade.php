@@ -105,6 +105,7 @@
 {{--    </div>--}}
     <hr style="height:3px;border-width:0;color:gray;background-color:gray">
     @yield('home')
+    @yield('culture-home')
 </div>
 </body>
 
@@ -117,5 +118,5 @@
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>
 
 @yield('javascript')
-@include('user/javascript')
+{{--@include('user/javascript')--}}
 </html>

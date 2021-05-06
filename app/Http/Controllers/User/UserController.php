@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
@@ -27,9 +28,9 @@ class UserController extends Controller
 
         // Data for 1st graph of 2nd row
 
-        $captureLocationWise = DB::table('Capture Location wise')->get();
-        $yearOfCaptureLocationWise = DB::table('Capture Location wise')->pluck('Year')->toArray();
-        $locations = DB::table('Capture Location wise')->pluck('District')->toArray();
+        $captureLocationWise = DB::table('capture location wise')->get();
+        $yearOfCaptureLocationWise = DB::table('capture location wise')->pluck('Year')->toArray();
+        $locations = DB::table('capture location wise')->pluck('District')->toArray();
         $locations = array_unique($locations);
         $xAxisValueOfCaptureLocationWise = array();
         $yAxisValuesOfCaptureLocationWise = array();
@@ -48,11 +49,11 @@ class UserController extends Controller
         $floodPlainFish = [];
 
         foreach ($xAxisValueOfCaptureLocationWise as $year) {
-            $sumOfRiverFish = DB::table('Capture Location wise')->where('Year' ,$year)->sum('River');
-            $sumOfSundarbansFish = DB::table('Capture Location wise')->where('Year' ,$year)->sum('Sundarbans');
-            $sumOfBeelFish = DB::table('Capture Location wise')->where('Year' ,$year)->sum('Beel');
-            $sumOfKaptaiLakeFish = DB::table('Capture Location wise')->where('Year' ,$year)->sum('Kaptai Lake');
-            $sumOfFloodPlainFish = DB::table('Capture Location wise')->where('Year' ,$year)->sum('Flood Plain');
+            $sumOfRiverFish = DB::table('capture location wise')->where('Year' ,$year)->sum('River');
+            $sumOfSundarbansFish = DB::table('capture location wise')->where('Year' ,$year)->sum('Sundarbans');
+            $sumOfBeelFish = DB::table('capture location wise')->where('Year' ,$year)->sum('Beel');
+            $sumOfKaptaiLakeFish = DB::table('capture location wise')->where('Year' ,$year)->sum('Kaptai Lake');
+            $sumOfFloodPlainFish = DB::table('capture location wise')->where('Year' ,$year)->sum('Flood Plain');
 
             array_push($riverFish,$sumOfRiverFish);
             array_push($sundarbansFish,$sumOfSundarbansFish);
@@ -130,7 +131,7 @@ class UserController extends Controller
 
     public function captureByLocation($location){
 
-        $yearOfCaptureLocationWise = DB::table('Capture Location wise')->pluck('Year')->toArray();
+        $yearOfCaptureLocationWise = DB::table('capture location wise')->pluck('Year')->toArray();
         $xAxisValueOfCaptureLocationWise = array();
         $yAxisValuesOfCaptureLocationWise = array();
         $yearOfCaptureLocationWise = array_unique($yearOfCaptureLocationWise);
@@ -148,23 +149,23 @@ class UserController extends Controller
         $floodPlainFish = [];
 
         foreach ($xAxisValueOfCaptureLocationWise as $year) {
-            $sumOfRiverFish = DB::table('Capture Location wise')
+            $sumOfRiverFish = DB::table('capture location wise')
                 ->where('Year' ,$year)
                 ->where("District","=",$location)
                 ->sum('River');
-            $sumOfSundarbansFish = DB::table('Capture Location wise')
+            $sumOfSundarbansFish = DB::table('capture location wise')
                 ->where('Year' ,$year)
                 ->where("District","=",$location)
                 ->sum('Sundarbans');
-            $sumOfBeelFish = DB::table('Capture Location wise')
+            $sumOfBeelFish = DB::table('capture location wise')
                 ->where('Year' ,$year)
                 ->where("District","=",$location)
                 ->sum('Beel');
-            $sumOfKaptaiLakeFish = DB::table('Capture Location wise')
+            $sumOfKaptaiLakeFish = DB::table('capture location wise')
                 ->where('Year' ,$year)
                 ->where("District","=",$location)
                 ->sum('Kaptai Lake');
-            $sumOfFloodPlainFish = DB::table('Capture Location wise')
+            $sumOfFloodPlainFish = DB::table('capture location wise')
                 ->where('Year' ,$year)
                 ->where("District","=",$location)
                 ->sum('Flood Plain');
@@ -251,6 +252,27 @@ class UserController extends Controller
     }
 
     public function atAGlanceByCategoryAndYear($category){
+        $atAGlanceByCategoryAndYear = array();
+        //TODO need to fixed with
+        $year = "2018-19";
+        if($category == 'Capture'){
+            $years = DB::table('capture location wise')->pluck('Year');
+            $latestYear = $years[0];
+            $riverFish = DB::table('capture location wise')->where('Year' ,$latestYear)->sum('River');
+            $sundarbansFish = DB::table('capture location wise')->where('Year' ,$latestYear)->sum('Sundarbans');
+            $beelFish = DB::table('capture location wise')->where('Year' ,$latestYear)->sum('Beel');
+            $kaptaiLakeFish = DB::table('capture location wise')->where('Year' ,$latestYear)->sum('Kaptai Lake');
+            $floodPlainFish = DB::table('capture location wise')->where('Year' ,$latestYear)->sum('Flood Plain');
 
+            $atAGlanceByCategoryAndYear['River'] = $riverFish;
+            $atAGlanceByCategoryAndYear['Sundarbans'] = $sundarbansFish;
+            $atAGlanceByCategoryAndYear['Beel'] = $beelFish;
+            $atAGlanceByCategoryAndYear['Kaptai Lake'] = $kaptaiLakeFish;
+            $atAGlanceByCategoryAndYear['Flood Plain'] = $floodPlainFish;
+
+
+        }
+
+        return view('user.annual-category-atAGlance',["year"=>$year,"atAGlanceByCategoryAndYear"=>$atAGlanceByCategoryAndYear]);
     }
 }

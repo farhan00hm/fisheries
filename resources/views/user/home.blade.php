@@ -8,9 +8,12 @@
             <canvas id="at-a-glance-pie-chart" width="600"  height="600" style="align-items: center"></canvas>
         </div>
         <div class="col-8">
-            <h7 style="text-align: center">Total Production at a glance</h7>
-            <hr>
-            <canvas id="line-chart" width="600" height="300" style="align-items: center"></canvas>
+            <div id="explore-by-category-at-a-glance"></div>
+            <div id="at-a-glance-chart">
+                <h7 style="text-align: center">Total Production at a glance</h7>
+                <hr>
+                <canvas id="line-chart" width="600" height="300" style="align-items: center"></canvas>
+            </div>
         </div>
     </div>
 
@@ -47,3 +50,6 @@
     </div>
 @endsection
 
+@section('javascript')
+    @include('user/javascript')
+@endsection

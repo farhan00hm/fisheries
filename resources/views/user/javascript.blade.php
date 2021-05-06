@@ -281,12 +281,9 @@
                     url: url,
                     type: 'GET',
                 }).done(function (data) {
-                    console.log(data)
-                    let xAxisValueOfCaptureSpeciesWise= data.xAxisValueOfCaptureSpeciesWise;
-                    let yAxisValuesOfCaptureSpeciesWise = data.yAxisValuesOfCaptureSpeciesWise;
-                    // console.log(data);
-                    captureBySpeciesWiseChart.destroy();
-                    captureBySpecies(xAxisValueOfCaptureSpeciesWise,yAxisValuesOfCaptureSpeciesWise)
+                    $('#at-a-glance-chart').empty()
+                    $('#explore-by-category-at-a-glance').html(data)
+                    // captureBySpecies(xAxisValueOfCaptureSpeciesWise,yAxisValuesOfCaptureSpeciesWise)
                 }).fail(function (jqXHR, textStatus, errorThrown) {
                     console.log("fAILED")
                     // toastr.error("failed to load data");
