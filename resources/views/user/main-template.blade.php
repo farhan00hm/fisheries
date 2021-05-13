@@ -73,23 +73,23 @@
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav">
                             <li class="nav-item active">
-                                <a class="nav-element btn btn-sm btn-outline-secondary" type="button">Home</a>
+                                <a href="{{ route('home') }}" class="nav-element btn btn-sm btn-outline-secondary" type="button">Home</a>
                                 {{--                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>--}}
                             </li>
                             <li class="nav-item">
-                                <a class="nav-element btn btn-sm btn-outline-secondary" href="#">Capture</a>
+                                <a href="{{ route('River') }}" class="nav-element btn btn-sm btn-outline-secondary" href="#">Capture</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-element btn btn-sm btn-outline-secondary" href="#">Culture</a>
+                                <a href="{{ route('Baor') }}" class="nav-element btn btn-sm btn-outline-secondary" href="#">Culture</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-element btn btn-sm btn-outline-secondary" href="#">Marine</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-element btn btn-sm btn-outline-secondary" href="#">Hilsa</a>
+                                <a href="{{ route('hilsa') }}" class="nav-element btn btn-sm btn-outline-secondary" href="#">Hilsa</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-element btn btn-sm btn-outline-secondary" href="#">Prawn</a>
+                                <a href="{{ route('shrimp') }}" class="nav-element btn btn-sm btn-outline-secondary" href="#">Shrimp/Prawn</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-element btn btn-sm btn-outline-secondary" href="#">About</a>
@@ -108,6 +108,8 @@
     @yield('culture-home')
 </div>
 </body>
+
+
 
 {{--<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>--}}
 {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>--}}

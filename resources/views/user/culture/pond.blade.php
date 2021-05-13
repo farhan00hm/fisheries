@@ -1,52 +1,49 @@
 @extends('user.culture.home')
-@section('baor')
+@section('culture')
     <div class="row" style="margin-top: 40px">
         <div class="col-6" style="text-align: center;">
             <h7 style="text-align: center">Explore By Category</h7>
             <hr>
-            <canvas id="baor-production" width="600"  height="600" style="align-items: center"></canvas>
+            <canvas id="pond-production" width="600"  height="600" style="align-items: center"></canvas>
         </div>
         <div class="col-6">
             <div id="explore-by-category-at-a-glance"></div>
             <div id="at-a-glance-chart">
-                <h7 style="text-align: center">Culture trend for Baor By District</h7>
+                <h7 style="text-align: center">Culture trend for pond By District</h7>
                 <hr>
-                <select class="form-select" aria-label="Select Location" id="baor-location-selection" style="float: right">
+                <select class="form-select" aria-label="Select Location" id="pond-location-selection" style="float: right">
                     <option disabled selected>Select a location</option>
                     @foreach($districts as $district)
                         <option value="{{ $district }}">{{ $district }}</option>
                     @endforeach
                 </select>
-                <canvas id="baor-by-district" width="600" height="600" style="align-items: center"></canvas>
+                <canvas id="pond-by-district" width="600" height="600" style="align-items: center"></canvas>
             </div>
         </div>
     </div>
-
     <div class="row">
         <div class="col-12" style="text-align: center;">
             <h7 style="text-align: center">Explore By Category</h7>
             <hr>
-            <select class="form-select" aria-label="Select Location" id="baor-species-selection" style="float: right">
-{{--                <option disabled selected>Select a species</option>--}}
+            <select class="form-select" aria-label="Select Location" id="pond-species-selection" style="float: right">
+                {{--                <option disabled selected>Select a species</option>--}}
                 @foreach($species as $species)
                     <option value="{{ $species }}">{{ $species }}</option>
                 @endforeach
             </select>
-            <canvas id="baor-by-species" width="600"  height="600" style="max-height:600px;max-width:500px;align-items: center"></canvas>
+            <canvas id="pond-by-species" width="600"  height="600" style="max-height:600px;max-width:500px;align-items: center"></canvas>
         </div>
     </div>
 @endsection
 
-@section('baor-javascript')
+@section('culture-javascript')
     <script>
 
-        {{--let xAxisValuesOfBaorProduction = {!! json_encode($xAxisValuesOfBaorProduction) !!};--}}
-        {{--let yAxisValuesOfBaorProduction = {!! json_encode($yAxisValuesOfBaorProduction) !!};--}}
 
-        let baorDistrictChart;
-        let baorSpeciesChart;
-        function baorByProductionTrend(xAxisValue,yAxisValue){
-            new Chart(document.getElementById("baor-production"), {
+        let pondDistrictChart;
+        let pondSpeciesChart;
+        function pondByProductionTrend(xAxisValue,yAxisValue){
+            new Chart(document.getElementById("pond-production"), {
                 type: 'line',
                 data: {
                     labels: xAxisValue,
@@ -62,7 +59,7 @@
                 options: {
                     title: {
                         display: true,
-                        text: 'Culture Trend By Production'
+                        text: 'Pond Trend By Production'
                     },
                     plugins:{
                         datalabels: {
@@ -73,8 +70,8 @@
             });
         }
 
-        function baorByDistrictTrend(xAxisValue,yAxisValue){
-            baorDistrictChart = new Chart(document.getElementById("baor-by-district"), {
+        function pondByDistrictTrend(xAxisValue,yAxisValue){
+            pondDistrictChart = new Chart(document.getElementById("pond-by-district"), {
                 type: 'line',
                 data: {
                     labels: xAxisValue,
@@ -90,7 +87,7 @@
                 options: {
                     title: {
                         display: true,
-                        text: 'Culture Trend By Production'
+                        text: 'pond Trend By Production'
                     },
                     plugins:{
                         datalabels: {
@@ -99,10 +96,10 @@
                     }
                 }
             });
-            // baorDistrictChart();
         }
-        function baorBySpeciesTrend(xAxisValue,yAxisValue){
-            baorSpeciesChart = new Chart(document.getElementById("baor-by-species"), {
+
+        function pondBySpeciesTrend(xAxisValue,yAxisValue){
+            pondSpeciesChart = new Chart(document.getElementById("pond-by-species"), {
                 type: 'line',
                 data: {
                     labels: xAxisValue,
@@ -118,7 +115,7 @@
                 options: {
                     title: {
                         display: true,
-                        text: 'Baor Trend By Species'
+                        text: 'pond Trend By Species'
                     },
                     plugins:{
                         datalabels: {
@@ -127,36 +124,38 @@
                     }
                 }
             });
-            // baorDistrictChart();
+            // pondDistrictChart();
         }
 
         $(document).ready(function(){
-            let xAxisValuesOfBaorProduction = {!! json_encode($xAxisValuesOfBaorProduction) !!};
-            let yAxisValuesOfBaorProduction = {!! json_encode($yAxisValuesOfBaorProduction) !!};
-            let xAxisValuesOfBaorBySpecies = {!! json_encode($xAxisValuesOfBaorBySpecies) !!};
-            let yAxisValuesOfBaorBySpecies = {!! json_encode($yAxisValuesOfBaorBySpecies) !!};
-            $("#baor-location-selection").change(function(){
+            let xAxisValuesOfPondProduction = {!! json_encode($xAxisValuesOfPondProduction) !!};
+            let yAxisValuesOfPondProduction = {!! json_encode($yAxisValuesOfPondProduction) !!};
+            let xAxisValuesOfPondBySpecies = {!! json_encode($xAxisValuesOfPondBySpecies) !!};
+            let yAxisValuesOfPondBySpecies = {!! json_encode($yAxisValuesOfPondBySpecies) !!};
+            console.log(yAxisValuesOfPondBySpecies);
 
-                let selectedLocation = $("#baor-location-selection option:selected").val();
-                let url = "{{ route('culture-by-location',':location') }}"
+            $("#pond-location-selection").change(function(){
+
+                let selectedLocation = $("#pond-location-selection option:selected").val();
+                let url = "{{ route('pond-by-location',':location') }}"
                 url = url.replace(':location',selectedLocation);
                 $.ajax({
                     url: url,
                     type: 'GET',
                 }).done(function (data) {
                     console.log(data)
-                    let xAxisValue= data.xAxisValuesOfBaorProduction;
-                    let yAxisValue = data.yAxisValuesOfBaorProduction;
-                    baorDistrictChart.destroy();
-                    baorByDistrictTrend(xAxisValue,yAxisValue);
+                    let xAxisValue= data.xAxisValuesOfPondProduction;
+                    let yAxisValue = data.yAxisValuesOfPondProduction;
+                    pondDistrictChart.destroy();
+                    pondByDistrictTrend(xAxisValue,yAxisValue);
                 }).fail(function (jqXHR, textStatus, errorThrown) {
                     console.log("fAILED")
                 });
             });
 
-            $("#baor-species-selection").change(function(){
-                let selectedSpecies = $("#baor-species-selection option:selected").val();
-                let url = "{{ route('baor-by-species',':species') }}"
+            $("#pond-species-selection").change(function(){
+                let selectedSpecies = $("#pond-species-selection option:selected").val();
+                let url = "{{ route('pond-by-species',':species') }}"
                 url = url.replace(':species',selectedSpecies);
                 $.ajax({
                     url: url,
@@ -164,16 +163,16 @@
                 }).done(function (data) {
                     let xAxisValue= data.xAxisValue;
                     let yAxisValue = data.yAxisValue;
-                    baorSpeciesChart.destroy();
-                    baorBySpeciesTrend(xAxisValue,yAxisValue);
+                    pondSpeciesChart.destroy();
+                    pondBySpeciesTrend(xAxisValue,yAxisValue);
                 }).fail(function (jqXHR, textStatus, errorThrown) {
                     console.log("fAILED")
                 });
             });
 
-            baorByProductionTrend(xAxisValuesOfBaorProduction,yAxisValuesOfBaorProduction);
-            baorByDistrictTrend(xAxisValuesOfBaorProduction,yAxisValuesOfBaorProduction);
-            baorBySpeciesTrend(xAxisValuesOfBaorBySpecies,yAxisValuesOfBaorBySpecies);
+            pondByProductionTrend(xAxisValuesOfPondProduction,yAxisValuesOfPondProduction);
+            pondByDistrictTrend(xAxisValuesOfPondProduction,yAxisValuesOfPondProduction);
+            pondBySpeciesTrend(xAxisValuesOfPondBySpecies,yAxisValuesOfPondBySpecies);
         });
     </script>
 @endsection

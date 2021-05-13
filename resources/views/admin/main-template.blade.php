@@ -60,9 +60,9 @@
                         </li>
                         <li><a href="{{ route('capture-index') }}"><i class="menu-icon icon-inbox"></i>Capture<b class="label green pull-right">11</b> </a></li>
                         <li><a href="{{ route('culture-index') }}"><i class="menu-icon icon-inbox"></i>Culture </a></li>
-                        <li><a href="{{ url('#') }}"><i class="menu-icon icon-inbox"></i>Marine</a></li>
-                        <li><a href="{{ url('#') }}"><i class="menu-icon icon-inbox"></i>Hilsa</a></li>
-                        <li><a href="{{ url('#') }}"><i class="menu-icon icon-inbox"></i>Shrimp/Prawn</a></li>
+                        <li><a href="{{ route('marine-index') }}"><i class="menu-icon icon-inbox"></i>Marine</a></li>
+                        <li><a href="{{ route('hilsa-index') }}"><i class="menu-icon icon-inbox"></i>Hilsa</a></li>
+                        <li><a href="{{ route('shrimp-index') }}"><i class="menu-icon icon-inbox"></i>Shrimp/Prawn</a></li>
                         <li><a href="{{ route('others-index') }}">Others</a></li>
 
 
@@ -87,6 +87,9 @@
 
             @yield('capture')
             @yield('culture')
+            @yield('marine')
+            @yield('hilsa')
+            @yield('shrimp')
             @yield('others')
             @yield('all-articles')
             @yield('all-tables')

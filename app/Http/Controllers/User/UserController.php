@@ -254,7 +254,6 @@ class UserController extends Controller
     public function atAGlanceByCategoryAndYear($category){
         $atAGlanceByCategoryAndYear = array();
         //TODO need to fixed with
-        $year = "2018-19";
         if($category == 'Capture'){
             $years = DB::table('capture location wise')->pluck('Year');
             $latestYear = $years[0];
@@ -270,9 +269,31 @@ class UserController extends Controller
             $atAGlanceByCategoryAndYear['Kaptai Lake'] = $kaptaiLakeFish;
             $atAGlanceByCategoryAndYear['Flood Plain'] = $floodPlainFish;
 
-
+            return view('user.annual-category-atAGlance',["year"=>$latestYear,"atAGlanceByCategoryAndYear"=>$atAGlanceByCategoryAndYear]);
         }
 
-        return view('user.annual-category-atAGlance',["year"=>$year,"atAGlanceByCategoryAndYear"=>$atAGlanceByCategoryAndYear]);
+        if($category == 'Culture'){
+            $latestData = array();
+            $latestYear = DB::table("culture_baor")->first('Year');
+            $latestYear = $latestYear->Year;
+
+            $baor=DB::table("culture_baor")->where('Year',$latestYear)->sum("Production (MT)");
+            $cage=DB::table("culture_cage")->where('Year',$latestYear)->sum("Production (MT)");
+            $pen=DB::table("culture_pen")->where('Year',$latestYear)->sum("Production (MT)");
+            $pond=DB::table("culture_pond_production")->where('Year',$latestYear)->sum("Total");
+            $seasonal=DB::table("culture_seasonal_production (m ton)")->where('Year',$latestYear)->sum("Total");
+            $shrimp=DB::table("culture_shrimp-prawn_production (m ton)")->where('Year',$latestYear)->sum("Total");
+
+//            $latestData['year']=$latestYear;
+            $latestData['Baor']=$baor;
+            $latestData['Cage']=$cage;
+            $latestData['Pen']=$pen;
+            $latestData['Pond']=$pond;
+            $latestData['Seasonal']=$seasonal;
+            $latestData['Shrimp-Prawn']=$shrimp;
+
+            return view('user.annual-category-atAGlance',["year"=>$latestYear,"atAGlanceByCategoryAndYear"=>$latestData]);
+        }
+
     }
 }

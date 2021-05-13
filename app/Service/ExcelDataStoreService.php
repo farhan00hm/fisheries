@@ -71,7 +71,7 @@ class ExcelDataStoreService
                         if($tableHead['type'] == "double"){
                             $table->{$tableHead['type']}($tableHead['name'])->nullable();
                         }else{
-                            $table->{$tableHead['type']}($tableHead['name']);
+                            $table->{$tableHead['type']}($tableHead['name'])->nullable();
                         }
                     }
                 }
